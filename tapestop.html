@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        *{
+            --size: 10vw;
+            background-color: #333;
+            color: #eee;
+            font-family: monospace;
+        }
+
+        #thumb{
+            position: absolute;
+            width: var(--size);
+            height: var(--size);
+            left: 50vw;
+            top: 50vh;
+            border-radius: 100%;
+            background-color: transparent;
+            transform: translate(-50%,-50%);
+            line-height: var(--size);
+            font-size: var(--size);
+            text-align: center;
+            cursor: pointer;
+        }
+
+        #container{
+            margin-top: 20vh;
+            text-align: center;
+        }
+
+        #label{
+            padding: 1rem;
+            background-color: rgba(3,3,3,.3);
+            border-radius: 1rem;
+        }
+
+    </style>
+    <title>TapeStop</title>
+</head>
+<body>
+    <div id="container">
+        <span id="label" onclick="reset()">100 cm</span>
+    </div>
+    <div id="thumb">&#9673;</div>
+</body>
+<script>
+    var red = 240;
+    var green = 0;
+    var length = 100;
+    var ctr = null;
+    var label = document.getElementById('label');
+    
+
+    var reset = ()=>{
+        red = 200;
+        green = 0;
+        length=100;
+        label.innerText = length + " cm";
+        label.style.fontSize = (100-length)/60+4 + "vh";
+        label.style.color="rgb(" + red + ","+ green + ",0)";
+    }
+
+    reset();
+
+    var fail = ()=>{
+        alert("u-oh... you let the tape run down to 0 :(");
+        clearInterval(ctr);
+    }
+
+    var tick=()=>{
+        if(length){
+            length-=1;
+            if(green<200) green+=4;
+            else red-=3;
+            label.innerText = length + " cm";
+            label.style.fontSize = (100-length)/60+4 + "vh";
+            label.style.color="rgb(" + red + ","+ green + ",0)";
+        }
+        else fail();
+    }
+
+    var press = ()=>{
+        ctr = setInterval(tick,20);
+    }
+
+    var release = ()=>{
+        clearInterval(ctr);
+    }
+
+    document.getElementById('thumb').onmousedown=press;
+    document.getElementById('thumb').onmouseup=release;
+</script>
+</html>
