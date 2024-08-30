@@ -70,9 +70,9 @@ license:    https://creativecommons.org/licenses/by-sa/4.0/
     reset();
 
     var fail = ()=>{
+        navigator.vibrate([20,5,10]);
         alert("u-oh... you let the tape run down to 0 :(");
         clearInterval(ctr);
-        navigator.vibrate([20,5,10]);
         reset();
     }
 
