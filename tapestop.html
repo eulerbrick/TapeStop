@@ -24,11 +24,9 @@ license:    https://creativecommons.org/licenses/by-sa/4.0/
             left: 50vw;
             top: 50vh;
             border-radius: 100%;
-            background-color: transparent;
+            background-color: #888;
             transform: translate(-50%,-50%);
-            line-height: var(--size);
-            font-size: var(--size);
-            text-align: center;
+            border: .2rem solid #000;
             cursor: pointer;
         }
 
@@ -50,7 +48,7 @@ license:    https://creativecommons.org/licenses/by-sa/4.0/
     <div id="container">
         <span id="label" onclick="reset()">100 cm</span>
     </div>
-    <div id="thumb">&#9673;</div>
+    <div id="thumb"></div>
 </body>
 <script>
     var red = 240;
@@ -74,6 +72,7 @@ license:    https://creativecommons.org/licenses/by-sa/4.0/
     var fail = ()=>{
         alert("u-oh... you let the tape run down to 0 :(");
         clearInterval(ctr);
+        reset();
     }
 
     var tick=()=>{
@@ -98,5 +97,7 @@ license:    https://creativecommons.org/licenses/by-sa/4.0/
 
     document.getElementById('thumb').onmousedown=press;
     document.getElementById('thumb').onmouseup=release;
+    document.getElementById('thumb').ontouchstart = press;
+    document.getElementById('thumb').ontouchend = release;
 </script>
 </html>
