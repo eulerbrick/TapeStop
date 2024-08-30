@@ -11,7 +11,7 @@ license:    https://creativecommons.org/licenses/by-sa/4.0/
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         *{
-            --size: 10vw;
+            --size: max(20vh, 20vw);
             background-color: #333;
             color: #eee;
             font-family: monospace;
@@ -72,6 +72,7 @@ license:    https://creativecommons.org/licenses/by-sa/4.0/
     var fail = ()=>{
         alert("u-oh... you let the tape run down to 0 :(");
         clearInterval(ctr);
+        navigator.vibrate([20,5,10]);
         reset();
     }
 
@@ -89,10 +90,12 @@ license:    https://creativecommons.org/licenses/by-sa/4.0/
 
     var press = ()=>{
         ctr = setInterval(tick,20);
+        navigator.vibrate(2000);
     }
 
     var release = ()=>{
         clearInterval(ctr);
+        navigator.vibrate([20]);
     }
 
     document.getElementById('thumb').onmousedown=press;
